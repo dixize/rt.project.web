@@ -1,0 +1,97 @@
+:root {
+    --primary-blue: #001a4d;
+    --accent-orange: #ff4f12;
+    --glass: rgba(255, 255, 255, 0.1);
+    --text: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--primary-blue);
+    color: var(--text);
+    overflow: hidden; /* Скрываем скролл для эффекта приложения */
+}
+
+/* Живой фон */
+.bg-animate {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 50%, #003399 0%, #00081a 100%);
+    z-index: -1;
+}
+
+header { text-align: center; padding-top: 5vh; }
+.logo { font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; }
+.logo span { color: var(--accent-orange); }
+h1 { margin-top: 10px; font-weight: 300; opacity: 0.8; }
+
+/* Сетка карточек */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-orange);
+}
+
+.card-num {
+    font-size: 3rem;
+    font-weight: 700;
+    opacity: 0.1;
+    position: absolute;
+    top: 10px; right: 10px;
+}
+
+/* Детальная страница */
+#project-detail {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #f4f7f9;
+    color: #333;
+    padding: 80px 40px;
+    overflow-y: auto;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: translateY(100%);
+}
+
+#project-detail.visible { transform: translateY(0); }
+
+.back-btn {
+    position: absolute;
+    top: 30px; left: 30px;
+    padding: 10px 20px;
+    border: none;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .projects-grid { padding: 20px; grid-template-columns: 1fr; }
+    body { overflow-y: auto; }
+}
