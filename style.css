@@ -1,97 +1,74 @@
-:root {
-    --primary-blue: #001a4d;
-    --accent-orange: #ff4f12;
-    --glass: rgba(255, 255, 255, 0.1);
-    --text: #ffffff;
+const projectData = {
+    robotics: {
+        title: "1. Роботизация производства",
+        pre: "Тренд на импортозамещение, субсидии 20-50%, дефицит кадров.",
+        ops: ["Резка (Лазерная, Плазменная)", "Формовка", "Соединение (Сварка)", "Обработка", "Проверка", "Складирование"],
+        effects: "Повышение производительности на 30-40%, снижение травматизма на 50-60%.",
+        partners: ["НПП Радиосвязь", "УВЗ", "ОмскТрансМаш", "УралТрубПром", "РКЦ Прогресс"]
+    },
+    quality: {
+        title: "2. Автоматизированный контроль качества",
+        pre: "Развитие ИИ, оцифровка процессов, повышение требований к качеству.",
+        ops: ["Конвейерное производство", "Гранулометрия", "Диспетчеризация транспорта", "Складская логистика", "Весогабаритный контроль"],
+        effects: "Сокращение брака на 20-35%, снижение издержек на 15-20%.",
+        partners: ["ГАЗ ГРУППА", "ШЕРЕМЕТЬЕВО", "УВЗ"]
+    },
+    security: {
+        title: "3. Инженерно-технические средства охраны",
+        pre: "Требования ФЗ, антитеррористическая защищенность, развитие ИТ.",
+        ops: ["Инженерные сооружения", "Досмотровые системы", "Охранная сигнализация", "Видеонаблюдение", "Контроль доступа"],
+        effects: "Точность обнаружения 99.9%, реагирование 2-3 секунды.",
+        partners: ["ФорвардЭнерго", "Океан", "КамчатскЭнерго", "Роснефть", "МВД РОССИИ"]
+    },
+    eco: {
+        title: "4. Промбезопасность, экомониторинг",
+        pre: "Программа «Безопасный труд», законодательная база, экологическая ответственность.",
+        ops: ["Системы безопасности", "Электронные наряды", "Видеоаналитика", "Предотвращение столкновений", "Экомониторинг", "Сейсмостанции"],
+        effects: "Снижение аварийности на 30-50%, выявление угроз за 1-2 минуты.",
+        partners: ["Селигдар", "СУЭК", "EVRAZ", "Норникель"]
+    },
+    equipment: {
+        title: "5. Технологическое оборудование",
+        pre: "Импортозамещение, замена иностранных производителей российскими аналогами.",
+        ops: ["Тепло и пар (Котлы)", "Электроэнергия (Трансформаторы)", "Давление (Компрессоры)", "Турбины", "Вентиляция"],
+        effects: "Увеличение объемов на 15-20%, снижение затрат на ремонт на 30-40%.",
+        partners: ["ЯЗДА", "ЯМЗ", "УВЗ", "Хиагда"]
+    }
+};
+
+function openModal(id) {
+    const data = projectData[id];
+    const modal = document.getElementById('projectModal');
+    const body = document.getElementById('modalBody');
+
+    body.innerHTML = `
+        <h2 style="color: #ff4f12; margin-bottom:10px;">${data.title}</h2>
+        <p><strong>Предпосылки:</strong> ${data.pre}</p>
+        <div style="margin: 20px 0;">
+            <h4>Область применения:</h4>
+            <ul style="column-count: 2; padding-left: 20px; margin-top:10px;">
+                ${data.ops.map(item => `<li>${item}</li>`).join('')}
+            </div>
+        </div>
+        <div style="background: #f0f4f8; padding: 15px; border-radius: 10px; margin: 20px 0;">
+            <strong>Эффекты:</strong> ${data.effects}
+        </div>
+        <h4>Опыт внедрения:</h4>
+        <div class="partners-row">
+            ${data.partners.map(p => `<div class="partner-tag" style="background:#eee; padding:5px 12px; border-radius:4px; font-size:12px; font-weight:bold;">${p}</div>`).join('')}
+        </div>
+    `;
+
+    modal.style.display = "block";
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--primary-blue);
-    color: var(--text);
-    overflow: hidden; /* Скрываем скролл для эффекта приложения */
+function closeModal() {
+    document.getElementById('projectModal').style.display = "none";
 }
 
-/* Живой фон */
-.bg-animate {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle at 50% 50%, #003399 0%, #00081a 100%);
-    z-index: -1;
-}
-
-header { text-align: center; padding-top: 5vh; }
-.logo { font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; }
-.logo span { color: var(--accent-orange); }
-h1 { margin-top: 10px; font-weight: 300; opacity: 0.8; }
-
-/* Сетка карточек */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.card {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 30px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.2);
-    border-color: var(--accent-orange);
-}
-
-.card-num {
-    font-size: 3rem;
-    font-weight: 700;
-    opacity: 0.1;
-    position: absolute;
-    top: 10px; right: 10px;
-}
-
-/* Детальная страница */
-#project-detail {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #f4f7f9;
-    color: #333;
-    padding: 80px 40px;
-    overflow-y: auto;
-    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-    transform: translateY(100%);
-}
-
-#project-detail.visible { transform: translateY(0); }
-
-.back-btn {
-    position: absolute;
-    top: 30px; left: 30px;
-    padding: 10px 20px;
-    border: none;
-    background: var(--primary-blue);
-    color: white;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .projects-grid { padding: 20px; grid-template-columns: 1fr; }
-    body { overflow-y: auto; }
+// Закрытие при клике вне окна
+window.onclick = function(event) {
+    if (event.target == document.getElementById('projectModal')) {
+        closeModal();
+    }
 }
