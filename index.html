@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ростелеком Бизнес | Цифровая Экосистема</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-animate"></div>
+
+    <main id="home" class="active-page">
+        <header>
+            <div class="logo">РОСТЕЛЕКОМ <span>БИЗНЕС</span></div>
+            <h1>Отраслевые решения 2026</h1>
+        </header>
+
+        <nav class="projects-grid">
+            <div class="card" onclick="openProject('robotics')">
+                <div class="card-num">01</div>
+                <h3>Роботизация производства</h3>
+                <p>Повышение эффективности на 30-40%</p>
+            </div>
+            <div class="card" onclick="openProject('quality')">
+                <div class="card-num">02</div>
+                <h3>Контроль качества</h3>
+                <p>ИИ-мониторинг и дефектовка</p>
+            </div>
+            <div class="card" onclick="openProject('security')">
+                <div class="card-num">03</div>
+                <h3>Средства охраны</h3>
+                <p>Защита периметра и биометрия</p>
+            </div>
+            <div class="card" onclick="openProject('eco')">
+                <div class="card-num">04</div>
+                <h3>Промбезопасность</h3>
+                <p>Экомониторинг и охрана труда</p>
+            </div>
+            <div class="card" onclick="openProject('equipment')">
+                <div class="card-num">05</div>
+                <h3>Тех-оборудование</h3>
+                <p>Импортозамещение и ТЭС</p>
+            </div>
+        </nav>
+    </main>
+
+    <section id="project-detail" class="hidden">
+        <button class="back-btn" onclick="closeProject()">← Вернуться назад</button>
+        <div id="content-area">
+            </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
